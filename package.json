@@ -1,0 +1,62 @@
+{
+  "name": "@ridi/ridi-event-client",
+  "version": "0.0.0",
+  "description": "Ridibooks event tracking client",
+  "main": "dist/cjs/index.js",
+  "typings": "dist/typings/index.d.ts",
+  "scripts": {
+    "test": "jest",
+    "lint": "eslint 'src/**/*.ts' --fix",
+    "clean": "rm -rf dist",
+    "build": "npm run clean && npm run build:cjs && npm run build:umd",
+    "build:cjs": "tsc",
+    "build:umd": "webpack",
+    "deploy": "npm run build && npm publish -access public && npm install"
+  },
+  "pre-commit": [
+    "lint"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ridi/ridi-event-client.git"
+  },
+  "author": "sblee@ridi.com",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/ridi/ridi-event-client/issues"
+  },
+  "homepage": "https://github.com/ridi/ridi-event-client#readme",
+  "dependencies": {
+    "@types/lodash": "^4.14.155",
+    "js-cookie": "^2.2.1",
+    "lodash": "^4.17.20",
+    "performance-now": "^2.1.0",
+    "url-parse": "^1.4.3"
+  },
+  "devDependencies": {
+    "@ridi/eslint-config": "^5.1.0",
+    "@types/jest": "^24.0.12",
+    "@types/js-cookie": "^2.2.4",
+    "@types/url-parse": "^1.4.1",
+    "@typescript-eslint/eslint-plugin": "^4.1.1",
+    "@typescript-eslint/parser": "^4.1.1",
+    "acorn": "^8.0.1",
+    "eslint": "^7.12.1",
+    "eslint-plugin-import": "^2.22.0",
+    "eslint-plugin-jsx-a11y": "^6.3.1",
+    "eslint-plugin-prettier": "^3.1.4",
+    "eslint-plugin-react": "^7.20.6",
+    "eslint-plugin-react-hooks": "^4.1.2",
+    "jest": "^24.8.0",
+    "pre-commit": "^1.2.2",
+    "prettier": "1.13.4",
+    "promise-polyfill": "8.0.0",
+    "ts-jest": "^24.0.2",
+    "ts-loader": "^4.4.1",
+    "typescript": "^3.9.7",
+    "uglifyjs-webpack-plugin": "^2.2.0",
+    "webpack": "^4.44.1",
+    "webpack-cli": "^3.3.8",
+    "whatwg-fetch": "^2.0.4"
+  }
+}
