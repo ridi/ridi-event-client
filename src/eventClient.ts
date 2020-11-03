@@ -1,8 +1,7 @@
 import URL from 'url-parse';
 import { DeviceType } from './constants';
 import { loadTagManager } from './utils/externalServices';
-import { Item } from './models';
-import { PurchaseInfo } from './models/transaction';
+import { Item, PurchaseInfo } from './models';
 import { convertKeyToSnakeCase } from './utils/util';
 
 export interface ClientOptions {
@@ -10,6 +9,7 @@ export interface ClientOptions {
   debug?: boolean;
   development?: boolean;
   uId?: number;
+  autoPageView?: boolean;
   deviceType: DeviceType;
 }
 
@@ -24,6 +24,7 @@ export interface PageMeta {
   href: string;
   referrer: string;
 }
+
 /* eslint-enable camelcase */
 
 declare global {
@@ -35,7 +36,13 @@ declare global {
 export class EventClient {
   private tagCalled = false;
 
-  constructor(private options: ClientOptions) {}
+  constructor(private options: ClientOptions) {
+    if (this.options.autoPageView === undefined) {
+      this.options.autoPageView = true;
+    }
+
+    this.pushDataLayer(options);
+  }
 
   private get dataLayer() {
     if (!this.tagCalled) {
@@ -106,33 +113,38 @@ export class EventClient {
   }
 
   public sendPageView(href: string, referrer?: string, ts?: Date): void {
+    if (this.options.autoPageView) {
+      throw new Error(
+        '[@ridi/ridi-event-client] autoPageView option enabled. Do not call this method manually',
+      );
+    }
     const pageMeta = this.getPageMeta(href, referrer);
     this.sendEvent('PageView', { ...pageMeta }, ts);
   }
 
   public sendScreenView(
+    screenClass: string,
     screenName: string,
-    previousScreenName: string,
-    referrer?: string,
+    previousScreenName?: string,
     ts?: Date,
   ): void {
     this.sendEvent(
       'ScreenView',
-      { screenName, previousScreenName, referrer },
+      { screenName, screenClass, previousScreenName },
       ts,
     );
   }
 
-  public sendSignUp(method: string, ts?: Date): void {
-    this.sendEvent('SignUp', { method }, ts);
+  public sendSignUp(ts?: Date): void {
+    this.sendEvent('SignUp', { method: 'web' }, ts);
   }
 
-  public sendLogin(method: string, ts?: Date): void {
-    this.sendEvent('Login', { method }, ts);
+  public sendLogin(ts?: Date): void {
+    this.sendEvent('Login', { method: 'web' }, ts);
   }
 
-  public sendBeginCheckout(purchaseInfo: PurchaseInfo, ts?: Date): void {
-    this.sendEvent('BeginCheckout', { ...purchaseInfo }, ts);
+  public sendBeginCheckout(items: Item[], ts?: Date): void {
+    this.sendEvent('BeginCheckout', { items }, ts);
   }
 
   public sendAddPaymentInfo(
@@ -148,7 +160,7 @@ export class EventClient {
   }
 
   public sendUnenrollPreferences(items: Item[], ts?: Date): void {
-    this.sendEvent('UnenrollPreference');
+    this.sendEvent('UnenrollPreference', { items }, ts);
   }
 
   public sendEnrollNewBookNotification(items: Item[], ts?: Date): void {
