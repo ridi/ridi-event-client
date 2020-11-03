@@ -13,8 +13,6 @@ export interface ClientOptions {
   deviceType: DeviceType;
 }
 
-export type ChangeableOptions = Pick<ClientOptions, 'uId' | 'deviceType'>;
-
 /* eslint-disable camelcase */
 export interface PageMeta {
   page: string;
@@ -41,7 +39,7 @@ export class EventClient {
       this.options.autoPageView = true;
     }
 
-    this.pushDataLayer(options);
+    this.pushDataLayer({ ...options });
   }
 
   private get dataLayer() {
@@ -72,11 +70,6 @@ export class EventClient {
       href,
       referrer,
     };
-  }
-
-  public setMainOptions(newOptions: ChangeableOptions): void {
-    this.sendEvent('OptionsChanged', newOptions);
-    this.pushDataLayer(newOptions);
   }
 
   public async initialize(): Promise<void> {
