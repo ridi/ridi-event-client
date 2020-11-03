@@ -12,18 +12,18 @@
 <body>
 <script src="./dist/umd/bundle.min.js"></script>
 <script>
-    var tracker = new EventClient({
+    var client = new EventClient({
     deviceType: 'pc',
     uId: 'uId',
     debug: true,
     development: true,
     tagManagerOptions: {
       trackingId: "GTM-ID"
-    }
+    },
+    autoPageView: true,
   });
-  tracker.initialize();
-  tracker.sendPurchase(...);
-  tracker.
+  client.initialize();
+  client.sendPurchase(...);
 
 </script>
 <script>
