@@ -1,5 +1,7 @@
 # ridi-event-client
 
+[![npm](https://img.shields.io/npm/v/@ridi/ridi-event-client.svg)](https://www.npmjs.com/package/@ridi/ridi-event-client)
+
 ## Getting Started
 
 ```html
@@ -12,18 +14,18 @@
 <body>
 <script src="./dist/umd/bundle.min.js"></script>
 <script>
-    var tracker = new EventClient({
+    var client = new EventClient({
     deviceType: 'pc',
     uId: 'uId',
     debug: true,
     development: true,
     tagManagerOptions: {
       trackingId: "GTM-ID"
-    }
+    },
+    autoPageView: true,
   });
-  tracker.initialize();
-  tracker.sendPurchase(...);
-  tracker.
+  client.initialize();
+  client.sendPurchase(...);
 
 </script>
 <script>
@@ -41,6 +43,7 @@ $ npm run test
 ## Publish
 
 ```bash
+$ npm login
 $ npm run deploy
 $ # or
 $ npm run build && npm publish --access public
