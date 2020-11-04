@@ -1,5 +1,7 @@
 # ridi-event-client
 
+[![npm](https://img.shields.io/npm/v/@ridi/ridi-event-client.svg)](https://www.npmjs.com/package/@ridi/ridi-event-client)
+
 ## Getting Started
 
 ```html
@@ -41,6 +43,7 @@ $ npm run test
 ## Publish
 
 ```bash
+$ npm login
 $ npm run deploy
 $ # or
 $ npm run build && npm publish --access public
