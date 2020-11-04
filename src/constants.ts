@@ -10,6 +10,10 @@ export enum ServiceType {
 
 export enum DeviceType {
   PC = 'pc',
-  Mobile = 'mobile',
-  Paper = 'paper',
+  MOBILE = 'mobile',
+  PAPER = 'paper',
+}
+
+export enum LoginMethod {
+  WEB = 'web',
 }

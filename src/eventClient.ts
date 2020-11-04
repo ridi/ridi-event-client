@@ -1,5 +1,5 @@
 import URL from 'url-parse';
-import { DeviceType } from './constants';
+import { DeviceType, LoginMethod } from './constants';
 import { loadTagManager } from './utils/externalServices';
 import { Item, PurchaseInfo } from './models';
 import { convertKeyToSnakeCase } from './utils/util';
@@ -129,11 +129,11 @@ export class EventClient {
   }
 
   public sendSignUp(ts?: Date): void {
-    this.sendEvent('SignUp', { method: 'web' }, ts);
+    this.sendEvent('SignUp', { method: LoginMethod.WEB }, ts);
   }
 
   public sendLogin(ts?: Date): void {
-    this.sendEvent('Login', { method: 'web' }, ts);
+    this.sendEvent('Login', { method: LoginMethod.WEB }, ts);
   }
 
   public sendBeginCheckout(items: Item[], ts?: Date): void {
