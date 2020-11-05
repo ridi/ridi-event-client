@@ -12,18 +12,6 @@ export interface ClientOptions {
   deviceType: DeviceType;
 }
 
-/* eslint-disable camelcase */
-export interface PageMeta {
-  page: string;
-  device: DeviceType;
-  query_params: { [key: string]: string | undefined };
-  path: string;
-  href: string;
-  referrer: string;
-}
-
-/* eslint-enable camelcase */
-
 declare global {
   interface Window {
     dataLayer?: Record<string, any>[];
@@ -54,21 +42,6 @@ export class EventClient {
       console.warn('[@ridi/ridi-event-client] GTM is not initialized.');
     }
     this.dataLayer.push(data);
-  }
-
-  private getPageMeta(href: string, referrer = ''): PageMeta {
-    const url = new URL(href, {}, true);
-
-    const path = url.pathname;
-
-    return {
-      page: url.pathname.split('/')[1] || 'index',
-      device: this.options.deviceType,
-      query_params: url.query,
-      path,
-      href,
-      referrer,
-    };
   }
 
   public async initialize(): Promise<void> {
@@ -107,14 +80,13 @@ export class EventClient {
     return this.tagCalled;
   }
 
-  public sendPageView(href: string, referrer?: string, ts?: Date): void {
+  public sendPageView(ts?: Date): void {
     if (this.options.autoPageView) {
       throw new Error(
         '[@ridi/ridi-event-client] autoPageView option enabled. Do not call this method manually',
       );
     }
-    const pageMeta = this.getPageMeta(href, referrer);
-    this.sendEvent('PageView', { ...pageMeta }, ts);
+    this.sendEvent('PageView', {}, ts);
   }
 
   public sendScreenView(
