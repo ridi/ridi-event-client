@@ -14,20 +14,25 @@
 <body>
 <script src="./dist/umd/bundle.min.js"></script>
 <script>
-  var tracker = new EventClient({
+  var eventClient = new EventClient({
     deviceType: 'pc',
     uId: 'user-test',
     trackingId: "GTM-ID",
-    debug: true,
+    debug: false,
     autoPageView: true,
   });
 
-  tracker.sendPageView('http://naver.com')
-  tracker.sendEvent("test", {abcd: "efg"})
-
+  eventClient.initialize().then((_) => {
+      eventClient.sendAddPaymentInfo('payment_type', {
+        value: 1,
+        currency: 'KRW',
+        items: [
+            {item_id: 'item_id', item_name: 'abcd', item_category: 123456, service_type: 'ridibooks'}
+        ]
+      });
+  });
 </script>
-<script>
-  </script>
+
 </body>
 </html>
 ```
