@@ -7,7 +7,6 @@ import { convertKeyToSnakeCase } from './utils/util';
 export interface ClientOptions {
   trackingId: string;
   debug?: boolean;
-  development?: boolean;
   uId?: number;
   autoPageView?: boolean;
   deviceType: DeviceType;
