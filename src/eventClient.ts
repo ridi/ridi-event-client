@@ -39,7 +39,7 @@ export class EventClient {
       this.options.autoPageView = true;
     }
 
-    this.pushDataLayer({ ...options });
+    this.pushDataLayer({ event: 'Init', ...options });
   }
 
   private get dataLayer() {
@@ -73,7 +73,6 @@ export class EventClient {
   }
 
   public async initialize(): Promise<void> {
-    this.sendEvent('Init', { ...this.options });
     await loadTagManager(this.options.trackingId);
     this.tagCalled = true;
   }
