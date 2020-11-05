@@ -88,9 +88,8 @@ export class EventClient {
 
     const dataLayerValues = {
       event: name,
-      event_params: data,
+      event_params: { data, uId: this.options.uId },
       ts: ts.getTime(),
-      uid: this.options.uId,
     };
 
     if (this.options.debug) {
