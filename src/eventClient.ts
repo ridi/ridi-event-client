@@ -73,7 +73,7 @@ export class EventClient {
   }
 
   public async initialize(): Promise<void> {
-    this.pushDataLayer(this.options);
+    this.sendEvent('Init', { ...this.options });
     await loadTagManager(this.options.trackingId);
     this.tagCalled = true;
   }
@@ -88,7 +88,12 @@ export class EventClient {
       ts = new Date();
     }
 
-    const dataLayerValues = { event: name, event_params: data, ts };
+    const dataLayerValues = {
+      event: name,
+      event_params: data,
+      ts: ts.getTime(),
+      uid: this.options.uId,
+    };
 
     if (this.options.debug) {
       console.group(`[@ridi/ridi-event-client] Sending '${name}' event`);
