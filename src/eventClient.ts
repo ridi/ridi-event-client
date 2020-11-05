@@ -157,7 +157,7 @@ export class EventClient {
     this.sendEvent('EnrollPreference', { items }, ts);
   }
 
-  public sendUnenrollPreferences(items: Item[], ts?: Date): void {
+  public sendUnenrollPreference(items: Item[], ts?: Date): void {
     this.sendEvent('UnenrollPreference', { items }, ts);
   }
 
