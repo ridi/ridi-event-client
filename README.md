@@ -14,18 +14,16 @@
 <body>
 <script src="./dist/umd/bundle.min.js"></script>
 <script>
-    var client = new EventClient({
+  var tracker = new EventClient({
     deviceType: 'pc',
-    uId: 'uId',
+    uId: 'user-test',
+    trackingId: "GTM-ID",
     debug: true,
-    development: true,
-    tagManagerOptions: {
-      trackingId: "GTM-ID"
-    },
     autoPageView: true,
   });
-  client.initialize();
-  client.sendPurchase(...);
+
+  tracker.sendPageView('http://naver.com')
+  tracker.sendEvent("test", {abcd: "efg"})
 
 </script>
 <script>
