@@ -26,7 +26,17 @@ export class EventClient {
       this.options.autoPageView = true;
     }
 
+    loadTagManager(this.options.trackingId);
+
+    this.tagCalled = true;
+
     this.pushDataLayer({ event: 'Init', ...options });
+  }
+
+  public setUId(uId: number): void {
+    this.options.uId = uId;
+
+    this.pushDataLayer(this.options);
   }
 
   private get dataLayer() {
@@ -42,11 +52,6 @@ export class EventClient {
       console.warn('[@ridi/ridi-event-client] GTM is not initialized.');
     }
     this.dataLayer.push(data);
-  }
-
-  public async initialize(): Promise<void> {
-    await loadTagManager(this.options.trackingId);
-    this.tagCalled = true;
   }
 
   public sendEvent(

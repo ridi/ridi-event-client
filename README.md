@@ -17,19 +17,19 @@
   var eventClient = new EventClient({
     deviceType: 'pc',
     uId: 123456,
-    trackingId: "GTM-ID",
-    debug: false,
-    autoPageView: true,
+    debug: true,
+    trackingId: "GTM-5XSZZGH",
   });
 
-  eventClient.initialize().then((_) => {
-      eventClient.sendAddPaymentInfo('payment_type', {
-        value: 1,
-        currency: 'KRW',
-        items: [
-            {item_id: 'item_id', item_name: 'abcd', item_category: 123456, service_type: 'ridibooks'}
-        ]
-      });
+  eventClient.setUId(12345678);
+
+
+  eventClient.sendAddPaymentInfo('payment_type', {
+    value: 1,
+    currency: 'KRW',
+    items: [
+      {item_id: 'item_id', item_name: 'abcd', item_category: 123456, service_type: 'ridibooks'}
+    ]
   });
 </script>
 
