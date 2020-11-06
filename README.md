@@ -14,22 +14,26 @@
 <body>
 <script src="./dist/umd/bundle.min.js"></script>
 <script>
-    var client = new EventClient({
+  var eventClient = new client({
     deviceType: 'pc',
-    uId: 'uId',
+    uId: 123456,
     debug: true,
-    development: true,
-    tagManagerOptions: {
-      trackingId: "GTM-ID"
-    },
     autoPageView: true,
+    trackingId: "GTM-5XSZZGH",
   });
-  client.initialize();
-  client.sendPurchase(...);
 
+  eventClient.setUId(12345678);
+
+
+  eventClient.sendAddPaymentInfo('payment_type', {
+    value: 1,
+    currency: 'KRW',
+    items: [
+      {item_id: 'item_id', item_name: 'abcd', item_category: 123456, service_type: 'ridibooks'}
+    ]
+  });
 </script>
-<script>
-  </script>
+
 </body>
 </html>
 ```

@@ -7,23 +7,10 @@ import { convertKeyToSnakeCase } from './utils/util';
 export interface ClientOptions {
   trackingId: string;
   debug?: boolean;
-  development?: boolean;
   uId?: number;
   autoPageView?: boolean;
   deviceType: DeviceType;
 }
-
-/* eslint-disable camelcase */
-export interface PageMeta {
-  page: string;
-  device: DeviceType;
-  query_params: { [key: string]: string | undefined };
-  path: string;
-  href: string;
-  referrer: string;
-}
-
-/* eslint-enable camelcase */
 
 declare global {
   interface Window {
@@ -39,7 +26,17 @@ export class EventClient {
       this.options.autoPageView = true;
     }
 
-    this.pushDataLayer({ ...options });
+    loadTagManager(this.options.trackingId);
+
+    this.tagCalled = true;
+
+    this.pushDataLayer({ event: 'Init', ...options });
+  }
+
+  public setUId(uId: number): void {
+    this.options.uId = uId;
+
+    this.pushDataLayer(this.options);
   }
 
   private get dataLayer() {
@@ -57,27 +54,6 @@ export class EventClient {
     this.dataLayer.push(data);
   }
 
-  private getPageMeta(href: string, referrer = ''): PageMeta {
-    const url = new URL(href, {}, true);
-
-    const path = url.pathname;
-
-    return {
-      page: url.pathname.split('/')[1] || 'index',
-      device: this.options.deviceType,
-      query_params: url.query,
-      path,
-      href,
-      referrer,
-    };
-  }
-
-  public async initialize(): Promise<void> {
-    this.pushDataLayer(this.options);
-    await loadTagManager(this.options.trackingId);
-    this.tagCalled = true;
-  }
-
   public sendEvent(
     name: string,
     data: Record<string, any> = {},
@@ -88,7 +64,11 @@ export class EventClient {
       ts = new Date();
     }
 
-    const dataLayerValues = { event: name, event_params: data, ts };
+    const dataLayerValues = {
+      event: name,
+      event_params: { data, uId: this.options.uId },
+      ts: ts.getTime(),
+    };
 
     if (this.options.debug) {
       console.group(`[@ridi/ridi-event-client] Sending '${name}' event`);
@@ -105,14 +85,13 @@ export class EventClient {
     return this.tagCalled;
   }
 
-  public sendPageView(href: string, referrer?: string, ts?: Date): void {
+  public sendPageView(ts?: Date): void {
     if (this.options.autoPageView) {
       throw new Error(
         '[@ridi/ridi-event-client] autoPageView option enabled. Do not call this method manually',
       );
     }
-    const pageMeta = this.getPageMeta(href, referrer);
-    this.sendEvent('PageView', { ...pageMeta }, ts);
+    this.sendEvent('PageView', {}, ts);
   }
 
   public sendScreenView(
@@ -152,7 +131,7 @@ export class EventClient {
     this.sendEvent('EnrollPreference', { items }, ts);
   }
 
-  public sendUnenrollPreferences(items: Item[], ts?: Date): void {
+  public sendUnenrollPreference(items: Item[], ts?: Date): void {
     this.sendEvent('UnenrollPreference', { items }, ts);
   }
 
