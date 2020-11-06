@@ -16,7 +16,7 @@
 <script>
   var eventClient = new EventClient({
     deviceType: 'pc',
-    uId: 'user-test',
+    uId: 123456,
     trackingId: "GTM-ID",
     debug: false,
     autoPageView: true,
