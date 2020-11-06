@@ -14,10 +14,11 @@
 <body>
 <script src="./dist/umd/bundle.min.js"></script>
 <script>
-  var eventClient = new EventClient({
+  var eventClient = new client({
     deviceType: 'pc',
     uId: 123456,
     debug: true,
+    autoPageView: true,
     trackingId: "GTM-5XSZZGH",
   });
 
