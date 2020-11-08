@@ -1,6 +1,6 @@
 # ridi-event-client
 
-[![npm](https://img.shields.io/npm/v/@ridi/ridi-event-client.svg)](https://www.npmjs.com/package/@ridi/ridi-event-client)
+[![npm](https://img.shields.io/npm/v/@ridi/event-client.svg)](https://www.npmjs.com/package/@ridi/event-client)
 
 ## Getting Started
 
@@ -19,7 +19,7 @@
     uId: 123456,
     debug: true,
     autoPageView: true,
-    trackingId: "GTM-5XSZZGH",
+    trackingId: "GTM-ID",
   });
 
   eventClient.setUId(12345678);
