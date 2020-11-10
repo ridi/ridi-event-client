@@ -1,4 +1,3 @@
-import URL from 'url-parse';
 import { DeviceType, LoginMethod } from './constants';
 import { loadTagManager } from './utils/externalServices';
 import { Item, PurchaseInfo } from './models';
