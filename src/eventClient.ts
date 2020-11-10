@@ -66,7 +66,7 @@ export class EventClient {
 
     const dataLayerValues = {
       event: name,
-      event_params: { data, uId: this.options.uId },
+      event_params: { ...data, uId: this.options.uId },
       ts: ts.getTime(),
     };
 
