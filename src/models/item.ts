@@ -9,4 +9,5 @@ export interface Item {
   readonly item_category: number;
   readonly item_genre?: string;
   readonly price?: number;
+  readonly quantity?: number;
 }
