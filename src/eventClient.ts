@@ -147,7 +147,7 @@ export class EventClient {
   }
 
   public sendViewContent(item: Item, ts?: Date): void {
-    this.sendEvent('ViewContent', { item }, ts);
+    this.sendEvent('ViewContent', { ...item }, ts);
   }
 
   public sendPurchase(
