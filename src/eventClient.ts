@@ -1,4 +1,3 @@
-import URL from 'url-parse';
 import { DeviceType, LoginMethod } from './constants';
 import { loadTagManager } from './utils/externalServices';
 import { Item, PurchaseInfo } from './models';
@@ -66,7 +65,7 @@ export class EventClient {
 
     const dataLayerValues = {
       event: name,
-      event_params: { data, uId: this.options.uId },
+      event_params: { ...data, uId: this.options.uId },
       ts: ts.getTime(),
     };
 
@@ -148,7 +147,7 @@ export class EventClient {
   }
 
   public sendViewContent(item: Item, ts?: Date): void {
-    this.sendEvent('ViewContent', { item }, ts);
+    this.sendEvent('ViewContent', { ...item }, ts);
   }
 
   public sendPurchase(
