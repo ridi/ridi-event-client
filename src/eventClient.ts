@@ -111,12 +111,8 @@ export class EventClient {
     this.sendEvent('BeginCheckout', { items }, ts);
   }
 
-  public sendAddPaymentInfo(
-    paymentType: string,
-    purchaseInfo: PurchaseInfo,
-    ts?: Date,
-  ): void {
-    this.sendEvent('AddPaymentInfo', { paymentType, ...purchaseInfo }, ts);
+  public sendAddPaymentInfo(purchaseInfo: PurchaseInfo, ts?: Date): void {
+    this.sendEvent('AddPaymentInfo', { ...purchaseInfo }, ts);
   }
 
   public sendEnrollPreference(items: Item[], ts?: Date): void {
