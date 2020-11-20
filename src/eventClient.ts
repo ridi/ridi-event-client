@@ -18,7 +18,7 @@ declare global {
 }
 
 export class EventClient {
-  private tagCalled = false;
+  private readonly tagCalled: boolean = false;
 
   constructor(private options: ClientOptions) {
     if (this.options.autoPageView === undefined) {
@@ -32,12 +32,6 @@ export class EventClient {
     this.pushDataLayer({ event: 'Init', ...options });
   }
 
-  public setUId(uId: number): void {
-    this.options.uId = uId;
-
-    this.pushDataLayer(this.options);
-  }
-
   private get dataLayer() {
     if (!this.tagCalled) {
       window.dataLayer = window.dataLayer || [];
@@ -46,11 +40,10 @@ export class EventClient {
     return window.dataLayer;
   }
 
-  private pushDataLayer(data: Record<string, any>): void {
-    if (!this.tagCalled) {
-      console.warn('[@ridi/ridi-event-client] GTM is not initialized.');
-    }
-    this.dataLayer.push(data);
+  public setUId(uId: number): void {
+    this.options.uId = uId;
+
+    this.pushDataLayer({ event: 'UIdChanged', ...this.options });
   }
 
   public sendEvent(
@@ -118,12 +111,8 @@ export class EventClient {
     this.sendEvent('BeginCheckout', { items }, ts);
   }
 
-  public sendAddPaymentInfo(
-    paymentType: string,
-    purchaseInfo: PurchaseInfo,
-    ts?: Date,
-  ): void {
-    this.sendEvent('AddPaymentInfo', { paymentType, ...purchaseInfo }, ts);
+  public sendAddPaymentInfo(purchaseInfo: PurchaseInfo, ts?: Date): void {
+    this.sendEvent('AddPaymentInfo', { ...purchaseInfo }, ts);
   }
 
   public sendEnrollPreference(items: Item[], ts?: Date): void {
@@ -156,5 +145,12 @@ export class EventClient {
     ts?: Date,
   ): void {
     this.sendEvent('Purchase', { transactionId, ...purchaseInfo }, ts);
+  }
+
+  private pushDataLayer(data: Record<string, any>): void {
+    if (!this.tagCalled) {
+      console.warn('[@ridi/ridi-event-client] GTM is not initialized.');
+    }
+    this.dataLayer.push(data);
   }
 }
