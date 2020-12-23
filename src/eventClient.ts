@@ -1,3 +1,4 @@
+import Cookies from 'js-cookie';
 import { DeviceType, LoginMethod } from './constants';
 import { loadTagManager } from './utils/externalServices';
 import { Item, PurchaseInfo } from './models';
@@ -38,6 +39,12 @@ export class EventClient {
     }
 
     return window.dataLayer;
+  }
+
+  // TODO: Generate Ruid if not exists
+  public get ruid(): string | undefined {
+    const ruid = Cookies.get('ruid') || undefined;
+    return ruid;
   }
 
   public setUId(uId: number): void {
