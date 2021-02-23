@@ -15,4 +15,5 @@ export interface Item {
    */
   readonly price?: number;
   readonly quantity: number;
+  readonly item_parent_category?: number;
 }
