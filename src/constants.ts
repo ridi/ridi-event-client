@@ -12,6 +12,7 @@ export enum DeviceType {
   PC = 'pc',
   MOBILE = 'mobile',
   PAPER = 'paper',
+  APP = 'app',
 }
 
 export enum LoginMethod {
