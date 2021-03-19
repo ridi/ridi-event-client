@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { DeviceType, LoginMethod } from './constants';
 import { loadTagManager } from './utils/externalServices';
-import { Item, PurchaseInfo } from './models';
+import { Item, PurchaseInfo, UserAttribute } from './models';
 import { convertKeyToSnakeCase } from './utils/util';
 
 export interface ClientOptions {
@@ -152,6 +152,10 @@ export class EventClient {
     ts?: Date,
   ): void {
     this.sendEvent('Purchase', { transactionId, ...purchaseInfo }, ts);
+  }
+
+  public sendUserAttribute(key: string, attr: UserAttribute, ts?: Date): void {
+    this.sendEvent('UserAttribute', { key, attr }, ts);
   }
 
   private pushDataLayer(data: Record<string, any>): void {
