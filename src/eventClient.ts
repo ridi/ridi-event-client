@@ -159,7 +159,7 @@ export class EventClient {
   }
 
   public sendCustomEvent(eventName: string, params: any, ts?: Date): void {
-    this.sendEvent('CustomEvent', {eventName, ...params}, ts);
+    this.sendEvent('CustomEvent', { eventName, ...params }, ts);
   }
 
   private pushDataLayer(data: Record<string, any>): void {
