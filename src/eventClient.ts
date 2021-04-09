@@ -158,6 +158,10 @@ export class EventClient {
     this.sendEvent('UserAttribute', { key, attr }, ts);
   }
 
+  public sendCustomEvent(eventName: string, params: any, ts?: Date): void {
+    this.sendEvent('CustomEvent', { eventName, ...params }, ts);
+  }
+
   private pushDataLayer(data: Record<string, any>): void {
     if (!this.tagCalled) {
       console.warn('[@ridi/ridi-event-client] GTM is not initialized.');
