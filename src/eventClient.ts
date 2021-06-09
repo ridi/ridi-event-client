@@ -162,6 +162,30 @@ export class EventClient {
     this.sendEvent('CustomEvent', { eventName, ...params }, ts);
   }
 
+  public sendAddToCart(items: Item[], ts?: Date): void {
+    this.sendEvent('AddToCart', { items }, ts);
+  }
+
+  public sendRemoveFromCart(items: Item[], ts?: Date): void {
+    this.sendEvent('RemoveFromCart', { items }, ts);
+  }
+
+  public sendAddToWish(items: Item[], ts?: Date): void {
+    this.sendEvent('AddToWish', { items }, ts);
+  }
+
+  public sendRemoveFromWish(items: Item[], ts?: Date): void {
+    this.sendEvent('RemoveFromWish', { items }, ts);
+  }
+
+  public sendCartToWishlist(items: Item[], ts?: Date): void {
+    this.sendEvent('CartToWishlist', { items }, ts);
+  }
+
+  public sendWishlistToCart(items: Item[], ts?: Date): void {
+    this.sendEvent('WishlistToCart', { items }, ts);
+  }
+
   private pushDataLayer(data: Record<string, any>): void {
     if (!this.tagCalled) {
       console.warn('[@ridi/ridi-event-client] GTM is not initialized.');
