@@ -119,7 +119,7 @@ export class EventClient {
   }
 
   public sendAddPaymentInfo(purchaseInfo: PurchaseInfo, ts?: Date): void {
-    this.sendEvent('AddPaymentInfo', { ...purchaseInfo }, ts);
+    this.sendEvent('AddPaymentInfo', purchaseInfo, ts);
   }
 
   public sendEnrollPreference(items: Item[], ts?: Date): void {
