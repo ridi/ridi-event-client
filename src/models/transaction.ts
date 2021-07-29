@@ -5,4 +5,5 @@ export interface PurchaseInfo {
   readonly currency: Currency;
   readonly value: number;
   readonly items: Item[];
+  readonly lowerLimitAutoCharge: boolean;
 }
