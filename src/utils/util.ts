@@ -1,5 +1,6 @@
-import _ from 'lodash';
+import mapKeys from 'lodash/mapKeys';
+import snakeCase from 'lodash/snakeCase';
 
 export function convertKeyToSnakeCase(obj: Record<any, any>): Record<any, any> {
-  return _.mapKeys(obj, (v, k) => _.snakeCase(k));
+  return mapKeys(obj, (v, k) => snakeCase(k));
 }
