@@ -47,7 +47,11 @@ export class EventClient {
     return ruid;
   }
 
-  public setUId(uId: number): void {
+  public get uId(): number | undefined {
+    return this.options.uId;
+  }
+
+  public setUId(uId?: number): void {
     this.options.uId = uId;
 
     this.pushDataLayer({ event: 'UIdChanged', ...this.options });
