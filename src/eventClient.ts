@@ -190,6 +190,23 @@ export class EventClient {
     this.sendEvent('WishlistToCart', { items }, ts);
   }
 
+  public sendAddRidiPayCard(
+    cardCode: string,
+    previousScreenName: string,
+    ts?: Date,
+  ): void {
+    this.sendEvent('AddRidiPayCard', { cardCode, previousScreenName }, ts);
+  }
+
+  public sendCheckoutRidiPay(
+    itemId: string,
+    type: string,
+    ridiPayType: string | 'ridipay_cash' | 'ridipay_direct',
+    ts?: Date,
+  ): void {
+    this.sendEvent('CheckoutRidiPay', { itemId, type, ridiPayType }, ts);
+  }
+
   private pushDataLayer(data: Record<string, any>): void {
     if (!this.tagCalled) {
       console.warn('[@ridi/ridi-event-client] GTM is not initialized.');
