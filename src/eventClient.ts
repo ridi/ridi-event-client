@@ -199,12 +199,10 @@ export class EventClient {
   }
 
   public sendCheckoutRidiPay(
-    itemId: string,
-    type: string,
     ridiPayType: string | 'ridipay_cash' | 'ridipay_direct',
     ts?: Date,
   ): void {
-    this.sendEvent('CheckoutRidiPay', { itemId, type, ridiPayType }, ts);
+    this.sendEvent('CheckoutRidiPay', { ridiPayType }, ts);
   }
 
   private pushDataLayer(data: Record<string, any>): void {
