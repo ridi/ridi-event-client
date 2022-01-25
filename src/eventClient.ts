@@ -190,16 +190,18 @@ export class EventClient {
     this.sendEvent('WishlistToCart', { items }, ts);
   }
 
-  public sendAddRidiPayCard(
-    cardCode: string,
-    previousScreenName: string,
-    ts?: Date,
-  ): void {
-    this.sendEvent('AddRidiPayCard', { cardCode, previousScreenName }, ts);
+  public sendAddRidiPayCard(previousScreenName: string, ts?: Date): void {
+    this.sendEvent('AddRidiPayCard', { previousScreenName }, ts);
   }
 
   public sendCheckoutRidiPay(
-    ridiPayType: string | 'ridipay_cash' | 'ridipay_direct',
+    ridiPayType:
+      | string
+      | 'ridipay_auto_charge_with_cash'
+      | 'ridipay_auto_charge'
+      | 'ridipay_charge'
+      | 'ridipay_cash'
+      | 'ridipay_direct',
     ts?: Date,
   ): void {
     this.sendEvent('CheckoutRidiPay', { ridiPayType }, ts);
