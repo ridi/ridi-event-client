@@ -1,7 +1,7 @@
 import Cookies from 'js-cookie';
 import { DeviceType, LoginMethod } from './constants';
 import { loadTagManager } from './utils/externalServices';
-import { BeginCheckoutParasm, Item, PurchaseInfo, UserAttribute } from './models';
+import { BeginCheckoutParams, Item, PurchaseInfo, UserAttribute } from './models';
 import { convertKeyToSnakeCase } from './utils/util';
 
 export interface ClientOptions {
@@ -118,7 +118,7 @@ export class EventClient {
     this.sendEvent('Login', { method: LoginMethod.WEB }, ts);
   }
 
-  public sendBeginCheckout(items: Item[], params: BeginCheckoutParasm, ts?: Date): void {
+  public sendBeginCheckout(items: Item[], params: BeginCheckoutParams, ts?: Date): void {
     this.sendEvent('BeginCheckout', { items, ...params }, ts);
   }
 
