@@ -118,7 +118,7 @@ export class EventClient {
     this.sendEvent('Login', { method: LoginMethod.WEB }, ts);
   }
 
-  public sendBeginCheckout(items: Item[], params: BeginCheckoutParams, ts?: Date): void {
+  public sendBeginCheckout(items: Item[], params?: BeginCheckoutParams, ts?: Date): void {
     this.sendEvent('BeginCheckout', { items, ...params }, ts);
   }
 
