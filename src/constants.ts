@@ -11,6 +11,8 @@ export enum ServiceType {
 export enum DeviceType {
   PC = 'pc',
   MOBILE = 'mobile',
+  PC_PWA = 'pc_pwa',
+  MOBILE_PWA = 'mobile_pwa',
   PAPER = 'paper',
   APP = 'app',
 }
