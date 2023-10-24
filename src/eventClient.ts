@@ -7,6 +7,7 @@ import { convertKeyToSnakeCase } from './utils/util';
 export interface ClientOptions {
   trackingId: string;
   debug?: boolean;
+  ffid?: string;
   uId?: number;
   autoPageView?: boolean;
   deviceType: DeviceType;
@@ -49,6 +50,11 @@ export class EventClient {
 
   public get uId(): number | undefined {
     return this.options.uId;
+  }
+
+  public setFfid(ffid?: string | undefined) {
+    this.options.ffid = ffid;
+    this.pushDataLayer({ event: 'FfidChanged', ...this.options });
   }
 
   public setUId(uId?: number | null): void {
