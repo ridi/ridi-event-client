@@ -158,10 +158,19 @@ export class EventClient {
 
   public sendPurchase(
     transactionId: string,
-    purchaseInfo: PurchaseInfo,
+    purchaseInfo: PurchaseInfo & Record<string, any>,
     ts?: Date,
   ): void {
     this.sendEvent('Purchase', { transactionId, ...purchaseInfo }, ts);
+  }
+
+
+  public sendPurchaseChargeAndPay(
+    transactionId: string,
+    purchaseInfo: PurchaseInfo & Record<string, any>,
+    ts?: Date,
+  ): void {
+    this.sendEvent('PurchaseChargeAndPay', { transactionId, ...purchaseInfo }, ts);
   }
 
   public sendUserAttribute(key: string, attr: UserAttribute, ts?: Date): void {
