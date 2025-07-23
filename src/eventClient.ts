@@ -222,6 +222,10 @@ export class EventClient {
     this.sendEvent('CheckoutRidiPay', { ridiPayType }, ts);
   }
 
+  public sendSearch(params: { keyword: string }, ts?: Date): void {
+    this.sendEvent('Search', params, ts);
+  }
+
   private pushDataLayer(data: Record<string, any>): void {
     if (!this.tagCalled) {
       console.warn('[@ridi/ridi-event-client] GTM is not initialized.');
