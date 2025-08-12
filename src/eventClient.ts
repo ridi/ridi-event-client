@@ -230,6 +230,10 @@ export class EventClient {
     this.sendEvent('FreeEpisodeView', { ...item }, ts);
   }
 
+  public sendUseFreeCoupon(couponType: 'wait_for_free', params: Item, ts?: Date): void {
+    this.sendEvent('UseFreeCoupon', { couponType, ...params }, ts);
+  }
+
   private pushDataLayer(data: Record<string, any>): void {
     if (!this.tagCalled) {
       console.warn('[@ridi/ridi-event-client] GTM is not initialized.');
