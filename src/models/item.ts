@@ -7,6 +7,7 @@ export interface Item {
   readonly item_episode_name?: string;
   readonly item_episode_id?: string;
   readonly item_category: number;
+  readonly item_category_name?: string;
   readonly item_genre?: string;
   /**
    * Original price of item that does not apply any discount
@@ -16,4 +17,5 @@ export interface Item {
   readonly price?: number;
   readonly quantity: number;
   readonly item_parent_category?: number;
+  readonly item_parent_category_name?: string;
 }

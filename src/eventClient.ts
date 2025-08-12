@@ -226,6 +226,10 @@ export class EventClient {
     this.sendEvent('Search', params, ts);
   }
 
+  public sendFreeEpisodeView(item: Item, ts?: Date): void {
+    this.sendEvent('FreeEpisodeView', { ...item }, ts);
+  }
+
   private pushDataLayer(data: Record<string, any>): void {
     if (!this.tagCalled) {
       console.warn('[@ridi/ridi-event-client] GTM is not initialized.');
