@@ -20,3 +20,5 @@ export enum DeviceType {
 export enum LoginMethod {
   WEB = 'web',
 }
+
+export type FreeCouponType = 'wait_for_free';
