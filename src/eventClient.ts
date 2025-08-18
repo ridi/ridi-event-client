@@ -1,5 +1,5 @@
 import Cookies from 'js-cookie';
-import { DeviceType, LoginMethod } from './constants';
+import { DeviceType, LoginMethod, FreeCouponType, ServiceType } from './constants';
 import { loadTagManager } from './utils/externalServices';
 import { Item, PurchaseInfo, UserAttribute } from './models';
 import { convertKeyToSnakeCase } from './utils/util';
@@ -224,6 +224,14 @@ export class EventClient {
 
   public sendSearch(params: { keyword: string }, ts?: Date): void {
     this.sendEvent('Search', params, ts);
+  }
+
+  public sendFreeEpisodeView(item: Item, ts?: Date): void {
+    this.sendEvent('FreeEpisodeView', { ...item }, ts);
+  }
+
+  public sendUseFreeCoupon(couponType: FreeCouponType, params: Item, ts?: Date): void {
+    this.sendEvent('UseFreeCoupon', { couponType, ...params }, ts);
   }
 
   private pushDataLayer(data: Record<string, any>): void {
